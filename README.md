@@ -1,0 +1,2 @@
+# LukasProjekt
+Majestatny projekt UPJS
