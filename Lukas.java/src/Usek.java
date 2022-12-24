@@ -1,4 +1,7 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.Date;
 
 public class Usek implements Comparable<Usek>{
@@ -36,11 +39,18 @@ public class Usek implements Comparable<Usek>{
         return datumUkoncenia.toString();
     }
     public static Usek zoStringu(String popis){
-        String[] result = popis.split("\t");
+        DateTimeFormatter df = new DateTimeFormatterBuilder()
+                // month-year
+                .appendPattern("MM/yyyy")
+                // default value for day
+                .parseDefaulting(ChronoField.DAY_OF_MONTH, 1)
+                // create formatter
+                .toFormatter();
+        String[] result = popis.split("\\\\t");
         if(result.length == 7) {
-            return new Usek(result[0], result[1], Double.parseDouble(result[2]), result[3], Integer.parseInt(result[4]), LocalDate.parse(result[5]), Integer.parseInt(result[6]));
+            return new Usek(result[0], result[1], Double.parseDouble(result[2]), result[3], Integer.parseInt(result[4]), LocalDate.parse(result[5],df), Integer.parseInt(result[6]));
         }else{
-            return new Usek(result[0], result[1], Double.parseDouble(result[2]), result[3], Integer.parseInt(result[4]), LocalDate.parse(result[5]), Integer.parseInt(result[6]), Double.parseDouble(result[7]));
+            return new Usek(result[0], result[1], Double.parseDouble(result[2]), result[3], Integer.parseInt(result[4]), LocalDate.parse(result[5],df), Integer.parseInt(result[6]), Double.parseDouble(result[7]));
         }
     }
     @Override

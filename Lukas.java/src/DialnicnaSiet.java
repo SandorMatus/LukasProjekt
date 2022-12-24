@@ -14,7 +14,7 @@ public class DialnicnaSiet {
     public static DialnicnaSiet nacitajSiet(String nazovSuboru){
         ArrayList<Usek> siet = new ArrayList<>();
         try {
-            List<String> allLines = Files.readAllLines(Paths.get(nazovSuboru));
+            List<String> allLines = Files.readAllLines(Paths.get(System.getProperty("user.dir") + nazovSuboru + ".txt"));
 
             for (String line : allLines) {
                 siet.add(Usek.zoStringu(line));
@@ -25,16 +25,17 @@ public class DialnicnaSiet {
         return new DialnicnaSiet(siet);
     }
     public void ulozSiet(String nazovSuboru) throws IOException {
-        File novySubor = new File(nazovSuboru);
+        File novySubor = new File(nazovSuboru + ".txt");
         novySubor.createNewFile();
-        FileWriter writer = new FileWriter(nazovSuboru);
-        siet.forEach((n) -> {//forEach cyklus cez Arraylist
-            try {
-                writer.write(n.toString());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        FileWriter writer = new FileWriter(nazovSuboru + ".txt");
+        for (Usek n : siet) {
+            if(n.getCena() != 0) {
+                writer.write(n.getNazov() + "\\t" + n.getOznacenie() + "\\t" + n.getDlzka() + "\\t" + n.getTunel() + "\\t" + n.getIntenzita() + "\\t" + n.getDatumVystavby() + "\\t" + n.getPocetMesiacovVystavby() + "\\t" + n.getCena() + "\n");
+            }else{
+                writer.write(n.getNazov() + "\\t" + n.getOznacenie() + "\\t" + n.getDlzka() + "\\t" + n.getTunel() + "\\t" + n.getIntenzita() + "\\t" + n.getDatumVystavby() + "\\t" + n.getPocetMesiacovVystavby() + "\n");
             }
-        });
+        }
+        writer.close();
     }
 
     @Override
@@ -45,7 +46,7 @@ public class DialnicnaSiet {
     }
     public double dlzkaDialnice(String oznacenie){//VZDIALENOST MA AJ DESATINNE CISLA PRETO DOUBLE A NIE INT!!!!!
         double celkovaDlzka = 0;
-        for (Usek n : siet) {//obycajny forEach
+        for (Usek n : siet) {
             if (n.getOznacenie() == oznacenie) {
                 celkovaDlzka += n.getDlzka();
             }

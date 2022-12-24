@@ -1,0 +1,4 @@
+D1\tE1\t1000\ttunel1\t13837\t06/2021\t2\t100
+D1\tE2\t1000\ttunel2\t13837\t02/2021\t4\t4
+D2\tE3\t1000\ttunel3\t13837\t03/2021\t1\t10
+D2\tE4\t1000\tziaden\t13837\t05/2021\t3
