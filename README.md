@@ -8,7 +8,6 @@ Spusti program v intelliJ alebo skompiluj a spusti pomocou kompilatora javac a j
 
 
 Majestatny projekt UPJS
-[link](N.Cage - Con Air)
+![N.Cage - Con Air](/N.Cage.jpg)
 
-<a href="https://assets-prd.ignimgs.com/2022/07/19/nicolas-cage-in-con-air-1658251738731.jpge">link</a>
 
